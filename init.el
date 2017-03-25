@@ -1,43 +1,26 @@
 
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-)
-(require 'cl)
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
+(require 'init-packages)
+
+(setq ring-bell-function 'ignore)
 
 
-(defvar  zilongshanren/packages '(
-				   company
-				   monokai-theme
-				   hungry-delete				   
-				   swiper
-				   counsel
-				   smartparens
-				   js2-mode
-				   nodejs-repl
-				   exec-path-from-shell
-		     ) "Default packages")
 
-(defun zilongshanren/packages-installed-p ()
-  (loop for pkg in zilongshanren/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
+(global-auto-revert-mode t)
 
-(unless (zilongshanren/packages-installed-p)
-  (message "%s" "Refreshing package database")
-  (package-refresh-contents)
-  (dolist (pkg zilongshanren/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
 
-(load-theme 'monokai t)
 (require 'hungry-delete)
-(global-hungry-delete-mode)
 
-(global-company-mode t)
+
+
 
 (global-hl-line-mode t)
+
+(abbrev-mode t)
+(define-abbrev-table 'global-abbrev-table '(
+					    ("kkk" "zilongshanren")
+))
 
 (defun open-my-init-file()
   (interactive)
@@ -57,7 +40,7 @@
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
-(global-auto-revert-mode t)
+
 
 (require 'org)
 (setq org-src-fontify-natively t)
@@ -72,8 +55,6 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
@@ -83,22 +64,12 @@
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 
 
-(require 'smartparens-config)
-;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-(smartparens-global-mode t)
 
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key (kbd "C-h C-v") 'find-variable)
 (global-set-key (kbd "C-h C-k") 'find-function-on-key)
 
 
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       auto-mode-alist))
-
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
 
 (require 'nodejs-repl)
 
