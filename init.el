@@ -2,6 +2,8 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 (require 'init-packages)
+(require 'init-ui)
+
 
 (setq ring-bell-function 'ignore)
 
@@ -15,7 +17,7 @@
 
 
 
-(global-hl-line-mode t)
+
 
 (abbrev-mode t)
 (define-abbrev-table 'global-abbrev-table '(
@@ -28,15 +30,13 @@
 
 (global-set-key (kbd "<f2>") 'open-my-init-file)
 
-(setq inhibit-splash-screen t)
+
 (global-linum-mode t)
 
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
 
 (delete-selection-mode t)
 
-(setq initial-frame-alist (quote ((fullscreen . maximized))))
+
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
