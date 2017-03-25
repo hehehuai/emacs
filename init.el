@@ -16,8 +16,5 @@
 
 (load-file custom-file)
 
-;;(setq enable-recursive-minibuffers t)
 
-
-;;(require 'nodejs-repl)
 
